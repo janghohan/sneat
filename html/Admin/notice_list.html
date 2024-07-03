@@ -1,0 +1,477 @@
+<?php 
+if(!isset($_COOKIE['admin_id'])){
+  echo "<script> alert('로그인이 필요한 페이지입니다.'); </script>";
+  echo "<script> location.href = './admin_login.html';</script>";
+}
+
+ ?>
+
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>저전마을 저전 관리자모드</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/summernote/summernote-lite.css">
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-text demo menu-text fw-bold ms-2">관리자</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboards -->
+            <li class="menu-item">
+              <a href="./" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <div class="text-truncate" data-i18n="대쉬보드">대쉬보드</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="./admin_list.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-face"></i>
+                <div class="text-truncate" data-i18n="관리자 관리">관리자 관리</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="./user_list.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate" data-i18n="유저 관리">유저 관리</div>
+              </a>
+            </li>
+            <li class="menu-item active open">
+	            <a href="javascript:void(0);" class="menu-link menu-toggle">
+	                <i class="menu-icon tf-icons bx bx-bell"></i>
+	                <div class="text-truncate" data-i18n="고객센터 관리">고객센터 관리</div>
+	            </a>
+	            <ul class="menu-sub">
+	                <li class="menu-item active">
+	                	<a href="./notice_list.html" class="menu-link">
+	                    	<div class="text-truncate" data-i18n="공지사항">공지사항</div>
+	                  	</a>
+	                </li>
+	                <li class="menu-item">
+	                	<a href="./qna_list.html" class="menu-link">
+	                    	<div class="text-truncate" data-i18n="문의사항">문의사항</div>
+	                  	</a>
+	                </li>
+	            </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-calendar"></i>
+                  <div class="text-truncate" data-i18n="예약 관리">예약 관리</div>
+              </a>
+              <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a href="./reserve_list.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="예약 리스트">예약 리스트</div>
+                      </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="./reserve_add.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="예약하기">예약하기</div>
+                      </a>
+                  </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="./popup_list.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-message"></i>
+                <div class="text-truncate" data-i18n="팝업 관리">팝업 관리</div>
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <?php include './common-top-navigation.php'; ?>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="py-3 mb-4"><span class="text-muted fw-light">공지사항 /</span> 리스트</h4>
+
+              <!-- Product List Widget -->
+
+              
+
+              <!-- Product List Table -->
+              <div class="card">
+
+                <div class="card-datatable table-responsive">
+                  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+
+                    <style type="text/css">
+                      .justify-content-start{
+                        padding: 10px;
+                        border-top: 1px solid #d9dee3;
+                      }
+                    </style>
+
+                    <div class="d-flex justify-content-start justify-content-md-end align-items-baseline">
+                      <div class="dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0">
+                        <div class="dataTables_length mt-0 mt-md-3 me-3" id="DataTables_Table_0_length">
+                          <label></label>
+                        </div>
+                        <div class="dt-buttons d-flex flex-wrap">
+                          <a href="./notice_write.html" class="dt-button add-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" style="color: #fff">
+                            <span><i class="bx bx-plus me-0 me-sm-1"></i>
+                              <span class="d-none d-sm-inline-block">공지사항 작성</span>
+                            </span>
+                          </a> 
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <table class="datatables-products table border-top">
+                      <thead>
+                        <tr>
+                          <th>번호</th>
+                          <th>상단고정</th>
+                          <th>필독표시</th>
+                          <th>제목</th>
+                          <th>작성자</th>
+                          <th>조회수</th>
+                          <th>작성시간</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="noticeList">
+                          <!-- 관리자 데이터 -->
+                      </tbody>
+                    </table>
+                    <div class="row mx-2" style="padding-top: 15px;">
+                      <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                         <!-- 페이징 버튼 -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with ❤️ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+                </div>
+                <div class="d-none d-lg-inline-block">
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+                  <a
+                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Documentation</a
+                  >
+
+                  <a
+                    href="https://themeselection.com/support/"
+                    target="_blank"
+                    class="footer-link d-none d-sm-inline-block"
+                    >Support</a
+                  >
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+
+    <!-- 써머노트 -->
+    <script src="../../assets/vendor/libs/summernote/lang/summernote-ko-KR.js"></script>
+    <script src="../../assets/vendor/libs/summernote/summernote-lite.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+
+    <script src="../../assets/js/modal-add-new-cc.js"></script>
+    <!-- Page JS -->
+    <!-- <script src="../../assets/js/app-ecommerce-product-list.js"></script> -->
+
+    <script type="text/javascript">
+      var currentPage = 1;
+      var jumpPage = 1;
+      loadTableData(currentPage);
+      setPageButton(currentPage);
+
+      // 페이지 클릭 이벤트 처리
+      $(document).on('click', '.paginate_button_num', function(){
+          var page = $(this).attr('data-page');
+          loadTableData(page);
+          currentPage = page;
+          setPageButton(currentPage);
+      });
+
+      function loadTableData(page){
+        $.ajax({
+            url: './API/notice_list_api.php',
+            type: 'GET',
+            data: {page: page},
+            async : false,
+            dataType: 'json',
+            success: function(response){
+                console.log(response);
+
+                $("#noticeList").html(response.data);
+
+                if ((page - 1) % 10 === 0) {
+                  loadPagination(response.startPage,response.endPage,response.totalPages);
+                }
+                
+            }
+        });
+      }
+
+      function loadPagination(startPage,endPage,totalPages){
+        var paginationHtml = '<ul class="pagination">';
+
+        if(startPage!=1){
+          paginationHtml += '<li id="prev-btn" class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">';
+          paginationHtml += '<a class="page-link">이전</a></li>';
+        }
+
+
+        for(var i = startPage; i <=endPage; i++){
+            paginationHtml += '<li id="page-'+i+'" class="paginate_button_num page-item" data-page="'+i+'">';
+            paginationHtml += '<a class="page-link">'+i+'</a>';
+        }
+
+        if(endPage!=totalPages){
+          paginationHtml += '<li id="next-btn" class="paginate_button page-item next" id="DataTables_Table_0_next">';
+          paginationHtml += '<a class="page-link">다음</a>';
+        }
+
+        paginationHtml += '</ul>';
+
+        $('#DataTables_Table_0_paginate').html(paginationHtml);
+       
+      }
+
+      function setPageButton(currentPage) {
+        $(".paginate_button_num").removeClass('active');
+        $("#page-"+currentPage).addClass('active');
+      }
+
+      $(document).on("click", "#prev-btn", function() {
+        jumpPage -= 10;
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+      });
+
+      $(document).on("click", "#next-btn", function() {
+        jumpPage += 10;
+        console.log(jumpPage);
+        loadTableData(jumpPage);
+        setPageButton(jumpPage);
+      });
+
+      $(document).on("click", ".delete-record", function() {
+        var row = $(this).closest('tr');
+        if(confirm('공지를 삭제하시겠습니까?')){
+          $.ajax({
+            type: "POST",
+            url: "API/notice_delete_api.php", // 서버 엔드포인트를 적절히 변경
+            dataType : 'json',
+            data: {noticeId:  $(this).attr('data-id')},
+            success: function(response) {
+                // 서버로부터 성공 응답을 받았을 때 처리
+                if(response.dataCode==200){
+                  row.remove();
+                }else{
+                  alert('공지 삭제에 실패했습니다. 관리자에게 문의하세요.');
+                }
+            },
+            error: function(error) {
+                // 서버로부터 오류 응답을 받았을 때 처리
+                console.error("Error:", error);
+            }
+          });
+        }else{
+          return false;
+        }
+      });
+
+      $(document).on('change', '.pinned', function() {
+        console.log($(this).is(':checked'));
+        pinnedChk($(this).attr('data-id'),$(this).is(':checked'),$(this));
+      });
+
+      function pinnedChk(noticeId,checked,obj){
+        $.ajax({
+          type: "POST",
+          url: "API/notice_chk_pinned.php", // 서버 엔드포인트를 적절히 변경
+          dataType : 'json',
+          data: {noticeId: noticeId, pinned:checked},
+          success: function(response) {
+              // 서버로부터 성공 응답을 받았을 때 처리
+              if(response.dataCode==200){
+                // row.remove();
+              }else{
+                alert('변경에 실패하였습니다. 관리자에게 문의해주세요.');
+                obj.prop('checked',!checked);
+              }
+          },
+          error: function(error) {
+              // 서버로부터 오류 응답을 받았을 때 처리
+              console.error("Error:", error);
+          }
+        });
+      }
+
+      $(document).on('change', '.essential', function() {
+        essentialChk($(this).attr('data-id'),$(this).is(':checked'),$(this));
+      });
+
+      function essentialChk(noticeId,checked,obj){
+        $.ajax({
+          type: "POST",
+          url: "API/notice_chk_essential.php", // 서버 엔드포인트를 적절히 변경
+          dataType : 'json',
+          data: {noticeId: noticeId, essential:checked},
+          success: function(response) {
+              // 서버로부터 성공 응답을 받았을 때 처리
+              if(response.dataCode==200){
+                // row.remove();
+              }else{
+                alert('변경에 실패하였습니다. 관리자에게 문의해주세요.');
+                obj.prop('checked',!checked);
+              }
+          },
+          error: function(error) {
+              // 서버로부터 오류 응답을 받았을 때 처리
+              console.error("Error:", error);
+          }
+        });
+      }
+
+      $(document).on('click','.update-record', function(){
+        var dataId = $(this).attr('data-id');
+        location.href = './notice_edit.html?noticeId='+dataId;
+      });
+
+    </script>
+  </body>
+</html>
