@@ -42,6 +42,9 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
 
     <!-- Page CSS -->
 
@@ -1813,7 +1816,7 @@
                           data-bs-target="#form-tabs-social"
                           role="tab"
                           aria-selected="false">
-                          Social Links
+                          * 중요 공지
                         </button>
                       </li>
                     </ul>
@@ -1852,188 +1855,43 @@
                       </div>
                       <!-- Account Details -->
                       <div class="tab-pane fade" id="form-tabs-account" role="tabpanel">
-                        <form>
-                          <div class="row g-3">
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-username"
-                                  >Username</label
-                                >
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-username"
-                                    class="form-control"
-                                    placeholder="john.doe" />
-                                </div>
+                        <div class="col-12">
+                          <div class="card mb-4">
+                            <h5 class="card-header">메모장</h5>
+                            <div class="card-body">
+                              <div id="bubble-toolbar">
+                                
                               </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-email">Email</label>
-                                <div class="col-sm-9">
-                                  <div class="input-group input-group-merge">
-                                    <input
-                                      type="text"
-                                      id="formtabs-email"
-                                      class="form-control"
-                                      placeholder="john.doe"
-                                      aria-label="john.doe"
-                                      aria-describedby="formtabs-email2" />
-                                    <span class="input-group-text" id="formtabs-email2">@example.com</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row form-password-toggle">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-password"
-                                  >Password</label
-                                >
-                                <div class="col-sm-9">
-                                  <div class="input-group input-group-merge">
-                                    <input
-                                      type="password"
-                                      id="formtabs-password"
-                                      class="form-control"
-                                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                      aria-describedby="formtabs-password2" />
-                                    <span class="input-group-text cursor-pointer" id="formtabs-password2"
-                                      ><i class="bx bx-hide"></i
-                                    ></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row form-password-toggle">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-confirm-password"
-                                  >Confirm</label
-                                >
-                                <div class="col-sm-9">
-                                  <div class="input-group input-group-merge">
-                                    <input
-                                      type="password"
-                                      id="formtabs-confirm-password"
-                                      class="form-control"
-                                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                      aria-describedby="formtabs-confirm-password2" />
-                                    <span class="input-group-text cursor-pointer" id="formtabs-confirm-password2"
-                                      ><i class="bx bx-hide"></i
-                                    ></span>
-                                  </div>
-                                </div>
+                              <div id="bubble-editor">
+                                <p>지우고 사용하세요.</p>
                               </div>
                             </div>
                           </div>
-                          <div class="row mt-4">
-                            <div class="col-md-6">
-                              <div class="row justify-content-end">
-                                <div class="col-sm-9">
-                                  <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                                  <button type="reset" class="btn btn-label-secondary">Cancel</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+                        </div>
+                        <div class="pt-4">
+                          <button type="submit" class="btn btn-primary me-sm-3 me-1">저장</button>
+                          <!-- <button type="reset" class="btn btn-label-secondary">취소</button> -->
+                        </div>
                       </div>
                       <!-- Social Links -->
                       <div class="tab-pane fade" id="form-tabs-social" role="tabpanel">
-                        <form>
-                          <div class="row g-3">
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-twitter"
-                                  >Twitter</label
-                                >
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-twitter"
-                                    class="form-control"
-                                    placeholder="https://twitter.com/abc" />
-                                </div>
+                        <div class="col-12">
+                          <div class="card mb-4">
+                            <h5 class="card-header">거래처 별 중요한 사항들 적어두세요</h5>
+                            <div class="card-body">
+                              <div id="snow-toolbar">
+                                
                               </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-facebook"
-                                  >Facebook</label
-                                >
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-facebook"
-                                    class="form-control"
-                                    placeholder="https://facebook.com/abc" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-google">Google+</label>
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-google"
-                                    class="form-control"
-                                    placeholder="https://plus.google.com/abc" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-linkedin"
-                                  >Linkedin</label
-                                >
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-linkedin"
-                                    class="form-control"
-                                    placeholder="https://linkedin.com/abc" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-instagram"
-                                  >Instagram</label
-                                >
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-instagram"
-                                    class="form-control"
-                                    placeholder="https://instagram.com/abc" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="row">
-                                <label class="col-sm-3 col-form-label text-sm-end" for="formtabs-quora">Quora</label>
-                                <div class="col-sm-9">
-                                  <input
-                                    type="text"
-                                    id="formtabs-quora"
-                                    class="form-control"
-                                    placeholder="https://quora.com/abc" />
-                                </div>
+                              <div id="snow-editor">
+                                <p>지우고 사용하세요.</p>
                               </div>
                             </div>
                           </div>
-                          <div class="row mt-4">
-                            <div class="col-md-6">
-                              <div class="row justify-content-end">
-                                <div class="col-sm-9">
-                                  <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                                  <button type="reset" class="btn btn-label-secondary">Cancel</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+                        </div>
+                        <div class="pt-4">
+                          <button type="submit" class="btn btn-primary me-sm-3 me-1">저장</button>
+                          <!-- <button type="reset" class="btn btn-label-secondary">취소</button> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2110,11 +1968,14 @@
     <script src="../../assets/vendor/libs/moment/moment.js"></script>
     <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/quill/katex.js"></script>
+    <script src="../../assets/vendor/libs/quill/quill.js"></script>
 
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="../../assets/js/form-layouts.js"></script>
+    <script src="../../assets/js/forms-editors.js"></script>
   </body>
 </html>
