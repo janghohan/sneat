@@ -1,0 +1,9 @@
+
+.keyword-btn{
+    position: relative;
+}
+
+.keyword-delete{
+    position: absolute;
+    right: 0px;
+}

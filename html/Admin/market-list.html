@@ -13,7 +13,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Horizontal Layouts - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Category List - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -40,14 +40,18 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
-    <link rel="stylesheet" href="./css/rankingup.css">
 
     <!-- Page CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/app-ecommerce.css" />
 
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
@@ -283,7 +287,7 @@
               </a>
             </li>
             <!-- e-commerce-app menu start -->
-            <li class="menu-item">
+            <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cart-alt"></i>
                 <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
@@ -294,7 +298,7 @@
                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active open">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <div class="text-truncate" data-i18n="Products">Products</div>
                   </a>
@@ -309,7 +313,7 @@
                         <div class="text-truncate" data-i18n="Add Product">Add Product</div>
                       </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item active">
                       <a href="app-ecommerce-category-list.html" class="menu-link">
                         <div class="text-truncate" data-i18n="Category List">Category List</div>
                       </a>
@@ -1121,7 +1125,7 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div class="text-truncate" data-i18n="Form Layouts">Form Layouts</div>
@@ -1132,7 +1136,7 @@
                     <div class="text-truncate" data-i18n="Vertical Form">Vertical Form</div>
                   </a>
                 </li>
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="form-layouts-horizontal.html" class="menu-link">
                     <div class="text-truncate" data-i18n="Horizontal Form">Horizontal Form</div>
                   </a>
@@ -1760,238 +1764,31 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="py-3 mb-4"><span class="text-muted fw-light">랭킹 업</span> 리스트</h4>
-              <div class="card-header">
-                <h5 class="card-title">상품등록</h5>
-                <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-6 product_status">
-                        <div class="row g-3">
-                            <div class="col-sm-8 col-8">
-                              <input type="text" class="form-control" placeholder="상품 구분이 가능한 번호,모델명">
-                            </div>
-                            <div class="col-sm-3 col-4 d-grid">
-                              <button class="btn btn-primary">
-                                <span><span class="d-none d-sm-inline-block">상품 추가</span></span>
-                            </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
+              <h4 class="py-3 mb-4"><span class="text-muted fw-light">판매처 관리 /</span> 마켓 리스트</h4>
 
-              <style>
-                .alert-info{
-                    margin-right: 5px;
-                    cursor: pointer;
-                }
-              </style>
-
-              <div style="display: flex; justify-content: flex-start;">
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    아부가르시아
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    NS
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    윤성
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-              </div>
-
-              <!-- Form with Tabs -->
-              <div class="card">
-                <div class="card-datatable table-responsive">
-                  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row mx-1">
-                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-3" style="margin: 1rem 0;">
-                            <div class="dataTables_length" id="DataTables_Table_0_length">
-                                <label>
-                                    <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                        <option value="10">아부가르시아</option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3">
-                                <div class="dt-buttons">
-                                    <button class="dt-button btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#modalCenter">
-                                        <span><i class="bx bx-plus me-md-1"></i><span class="d-md-inline-block d-none">수정 상품명 추가</span></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">데이터 추가</h5>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"></button>
-                                  
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col mb-3">
-                                    <label for="nameWithTitle" class="form-label">수정상품명</label>
-                                    <input
-                                      type="text"
-                                      id="nameWithTitle"
-                                      class="form-control"
-                                      placeholder="상품명 입력" />
-                                  </div>
-                                </div>
-                                <div class="row g-2">
-                                  <div class="col mb-0">
-                                    <label for="dobWithTitle" class="form-label">수정날짜</label>
-                                    <input class="form-control" type="datetime-local" value="2021-06-18T12:30:00" id="html5-datetime-local-input">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  닫기
-                                </button>
-                                <button type="button" class="btn btn-primary">저장</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="accordion mt-3" id="accordionExample">
-                            <div style="display: flex; padding-bottom: 1rem;">
-
-                              <div class="card accordion-item col-sm-11">
-                                <h2 class="accordion-header ">
-                                  <button type="button" class="accordion-button collapsed " data-bs-toggle="collapse" data-bs-target="#accordion1" aria-expanded="false" >
-                                    2024-07-05 / 12:35:00 왕눈이 문어 삼발이 에기 그린 수평 골드 애기   45
-                                  </button>
-                                </h2>
-          
-                                <div id="accordion1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                  <div class="accordion-body">
-                                    <button type="button" class="btn btn-primary keyword-btn">
-                                      삼발이에기
-                                      <span class="badge bg-white text-primary ms-1">56</span>
-                                      <span type="button" class="btn-close keyword-delete"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-primary keyword-btn">
-                                      삼발이에기
-                                      <span class="badge bg-white text-primary ms-1">56</span>
-                                      <span type="button" class="btn-close keyword-delete"></span>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-sm-1 d-grid">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter2">
-                                  <span><span class="d-none d-sm-inline-block">키워드</span></span>
-                                </button>
-                              </div>
-
-                            </div>
-                            
-                            <div style="display: flex; padding-bottom: 1rem;">
-                              <div class="card accordion-item col-sm-11">
-                                <h2 class="accordion-header ">
-                                  <button type="button" class="accordion-button collapsed " data-bs-toggle="collapse" data-bs-target="#accordion2" aria-expanded="false" >
-                                    2024-07-05 / 12:35:00 왕눈이 문어 삼발이 에기 그린 수평 골드 애기   45
-                                  </button>
-                                </h2>
-          
-                                <div id="accordion2" class="accordion-collapse collapse">
-                                  <div class="accordion-body">
-                                    <button type="button" class="btn btn-primary keyword-btn">
-                                      삼발이에기
-                                      <span class="badge bg-white text-primary ms-1">56</span>
-                                      <span type="button" class="btn-close keyword-delete"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-primary keyword-btn">
-                                      삼발이에기
-                                      <span class="badge bg-white text-primary ms-1">56</span>
-                                      <span type="button" class="btn-close keyword-delete"></span>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-1 d-grid">
-                                <button class="btn btn-primary">
-                                  <span><span class="d-none d-sm-inline-block">키워드</span></span>
-                                </button>
-                              </div>
-                            </div>
-
-                            <div style="display: flex; padding-bottom: 1rem;">
-                              <div class="card accordion-item col-sm-11">
-                                <h2 class="accordion-header d-flex">
-                                  <button type="button" class="accordion-button collapsed " data-bs-toggle="collapse" data-bs-target="#accordion3" aria-expanded="false">
-                                    2024-07-05 / 12:35:00 왕눈이 문어 삼발이 에기 그린 수평 골드 애기   45
-                                  </button>
-                                </h2>
-          
-                                <div id="accordion3" class="accordion-collapse collapse">
-                                  <div class="accordion-body">
-                                    삼발이에기 168, 문어에기 665, 문어애기 445
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-1 d-grid">
-                                <button class="btn btn-primary">
-                                  <span><span class="d-none d-sm-inline-block">키워드</span></span>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- 키워드 추가 수정 Modal -->
-                          <div class="modal fade" id="modalCenter2" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="modalCenterTitle">키워드 관리</h5>
-                                  <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                                    
-                                </div>
-                                
-                                <div class="modal-body">
-                                  <div class="row g-2">
-                                    <div class="col mb-0">
-                                      <label for="emailWithTitle" class="form-label">키워드</label>
-                                      <input type="text" id="keyword" class="form-control" >
-                                    </div>
-                                    <div class="col mb-0">
-                                      <label for="dobWithTitle" class="form-label">순위</label>
-                                      <input type="number" id="ranking" class="form-control" >
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                    닫기
-                                  </button>
-                                  <button type="button" class="btn btn-primary">저장</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
+              <div class="app-ecommerce-category">
+                <!-- Category List Table -->
+                <div class="card">
+                  <div class="card-datatable table-responsive">
+                    <table class="datatables-category-list table border-top">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th>Categories</th>
+                          <th class="text-nowrap text-sm-end">Total Products &nbsp;</th>
+                          <th class="text-nowrap text-sm-end">Total Earning</th>
+                          <th class="text-lg-center">Actions</th>
+                        </tr>
+                      </thead>
+                    </table>
                   </div>
-                  
                 </div>
+                <!-- Offcanvas to add new customer -->
+                
+              </div>
             </div>
-
-             
+            <!-- / Content -->
 
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
@@ -2056,11 +1853,12 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
     <script src="../../assets/vendor/libs/moment/moment.js"></script>
-    <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+    <script src="../../assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
     <script src="../../assets/vendor/libs/quill/katex.js"></script>
     <script src="../../assets/vendor/libs/quill/quill.js"></script>
 
@@ -2068,25 +1866,6 @@
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../../assets/js/form-layouts.js"></script>
-    <script src="../../assets/js/forms-editors.js"></script>
-
-    <script>
-      function setCurrentDateTime() {
-          const datetimeInput = document.getElementById('html5-datetime-local-input');
-          const now = new Date();
-          const year = now.getFullYear();
-          const month = String(now.getMonth() + 1).padStart(2, '0');
-          const day = String(now.getDate()).padStart(2, '0');
-          const hours = String(now.getHours()).padStart(2, '0');
-          const minutes = String(now.getMinutes()).padStart(2, '0');
-
-          const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-          datetimeInput.value = currentDateTime;
-      }
-
-      // Call the function to set the current date and time when the page loads
-      window.onload = setCurrentDateTime;
-  </script>
+    <script src="../../assets/js/app-ecommerce-category-list.js"></script>
   </body>
 </html>
