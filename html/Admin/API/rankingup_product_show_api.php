@@ -11,7 +11,7 @@ $result = mysqli_query($con,$sql);
 
 $data = array();
 $dataCode = '';
-while($row = mysqli_num_rows($result)){
+while($row = $result->fetch_assoc()){
     $accordionNum = 1;
 
     $dataCode .= '<div style="display: flex; padding-bottom: 1rem;">'.

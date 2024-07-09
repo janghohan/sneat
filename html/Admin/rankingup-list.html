@@ -1,3 +1,8 @@
+<?php
+include './dbConnect.php';
+
+?>
+
 <!DOCTYPE html>
 
 <html
@@ -1767,10 +1772,10 @@
                     <div class="col-md-6 product_status">
                         <div class="row g-3">
                             <div class="col-sm-8 col-8">
-                              <input type="text" class="form-control" placeholder="상품 구분이 가능한 번호,모델명">
+                              <input type="text" id="product-name" class="form-control" placeholder="상품 구분이 가능한 번호,모델명">
                             </div>
                             <div class="col-sm-3 col-4 d-grid">
-                              <button class="btn btn-primary">
+                              <button class="btn btn-primary" id="productAddBtn">
                                 <span><span class="d-none d-sm-inline-block">상품 추가</span></span>
                             </button>
                             </div>
@@ -1786,19 +1791,19 @@
                 }
               </style>
 
-              <div style="display: flex; justify-content: flex-start;">
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    아부가르시아
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <div style="display: flex; justify-content: flex-start;" id="product-div">
+                <?php
+                  $productSql = "SELECT * FROM rankingup_product WHERE username='wkdgh5430'";
+                  $result = mysqli_query($conn,$productSql);
+
+                  while($row = $result->fetch_assoc()){
+                ?>
+                <div class="alert alert-info alert-dismissible productClick" role="alert" data-ix="<?=$row['ix']?>">
+                    <?=$row['product_name']?>
+                    <button type="button" class="btn-close productDelBtn" data-ix="<?=$row['ix']?>"></button>
                 </div>
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    NS
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    윤성
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+
+                <?php } ?>
               </div>
 
               <!-- Form with Tabs -->
@@ -2087,6 +2092,64 @@
 
       // Call the function to set the current date and time when the page loads
       window.onload = setCurrentDateTime;
+
+
+      $("#productAddBtn").click(function(){
+
+        var productName = $("#product-name").val();
+
+        $.ajax({
+          type: "POST",
+          url: "./API/rankingup_product_add_api.php", // 서버 엔드포인트를 적절히 변경
+          dataType : 'json',
+          data: {product_name:productName},
+          success: function(response) {
+              // 서버로부터 성공 응답을 받았을 때 처리
+              console.log(response);
+              if(response['msg']==1){
+                alert('상품이 추가되었습니다.');
+                $("#product-div").append('<div class="alert alert-info alert-dismissible" role="alert">'+response["productName"]+'<button type="button" class="btn-close productDelBtn" data-ix="'+response["productIx"]+'"></button></div>');
+                // location.reload();
+              }
+
+          },
+          error: function(error) {
+              // 서버로부터 오류 응답을 받았을 때 처리
+              console.error("Error:", error);
+          }
+        });
+      });
+
+      $(document).on('click', '.productDelBtn', function() {
+          if(confirm("삭제하시겠습니까?")){
+            obj = $(this);
+            productIx = $(obj).attr('data-ix');
+            $.ajax({
+              type: "POST",
+              url: "./API/rankingup_product_delete_api.php", // 서버 엔드포인트를 적절히 변경
+              dataType : 'json',
+              data: {product_ix:productIx},
+              success: function(response) {
+                  // 서버로부터 성공 응답을 받았을 때 처리
+                  console.log(response);
+                  if(response['msg']==1){
+                    alert('상품이 삭제되었습니다.');
+                    $(obj).parent().remove();
+                  }
+
+              },
+              error: function(error) {
+                  // 서버로부터 오류 응답을 받았을 때 처리
+                  console.error("Error:", error);
+              }
+            });
+          }
+      });
+
+      $(document).on('click', '.productClick', function(){
+
+      });
+
   </script>
   </body>
 </html>
