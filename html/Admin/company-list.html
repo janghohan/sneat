@@ -1,5 +1,9 @@
-<!DOCTYPE html>
+<?php 
+include './dbConnect.php';
 
+?>
+
+<!DOCTYPE html>
 <html
   lang="en"
   class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
@@ -13,7 +17,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Vertical Layouts - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Horizontal Layouts - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -42,6 +46,9 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
 
     <!-- Page CSS -->
 
@@ -1123,12 +1130,12 @@
                 <div class="text-truncate" data-i18n="Form Layouts">Form Layouts</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="form-layouts-vertical.html" class="menu-link">
                     <div class="text-truncate" data-i18n="Vertical Form">Vertical Form</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="form-layouts-horizontal.html" class="menu-link">
                     <div class="text-truncate" data-i18n="Horizontal Form">Horizontal Form</div>
                   </a>
@@ -1756,11 +1763,38 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="py-3 mb-4"><span class="text-muted fw-light">거래처 관리/</span>거래처 등록</h4>
+              <h4 class="py-3 mb-4"><span class="text-muted fw-light">거래처</span> 리스트</h4>
+
+              <style>
+                .alert-info, .alert-secondary {
+                    margin-right: 5px;
+                    cursor: pointer;
+                }
+                .alert-secondary.active{
+                  background-color: #d7f5fc;
+                  border-color: #b3edf9;
+                  color: #03c3ec;
+                }
+              
+              </style>
+
+              <div style="display: flex; justify-content: flex-start;">
+                <?php
+                  $companyListSql = "SELECT * FROM company_list";
+                  $companyListResult =$conn->query($companyListSql);
+                  while($row = $companyListResult->fetch_assoc()){
+                ?>
+                <div class="alert alert-secondary  alert-dismissible" role="alert">
+                    <?=$row['company_name']?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php } ?>              
+              </div>
 
               <!-- Form with Tabs -->
               <div class="row">
                 <div class="col">
+                  <h6 class="mt-4">아부가르시아</h6>
                   <div class="nav-align-top mb-3">
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="nav-item">
@@ -1770,40 +1804,110 @@
                           data-bs-target="#form-tabs-personal"
                           role="tab"
                           aria-selected="true">
-                          Customer Info
+                          정보
                         </button>
                       </li>
-                     
+                      <li class="nav-item">
+                        <button
+                          class="nav-link memo"
+                          data-bs-toggle="tab"
+                          data-bs-target="#form-tabs-account"
+                          role="tab"
+                          aria-selected="false"
+                          data-v="memo">
+                          메모
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button
+                          class="nav-link important"
+                          data-bs-toggle="tab"
+                          data-bs-target="#form-tabs-social"
+                          role="tab"
+                          aria-selected="false"
+                          data-v="important">
+                          * 중요 공지
+                        </button>
+                      </li>
                     </ul>
                     <div class="tab-content">
+                      <!-- Personal Info -->
                       <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
-                        <form method="post" action="./API/market-add.php">
+                        <form method="post" action="./API/company_edit_api.php">
+                          <input type="hidden" name="editType" value="basic">
+                          <input type="hidden" name="companyIx" class="company-ix"  val="">
                           <div class="row g-3">
                             <div class="col-md-6">
                               <label class="form-label" for="formtabs-first-name">거래처 이름</label>
-                              <input type="text" id="formtabs-first-name" class="form-control" placeholder="" />
+                              <input type="text" name="companyName" class="form-control" placeholder="" />
                             </div>
                             <div class="col-md-6">
                               <label class="form-label" for="formtabs-last-name">주소</label>
-                              <input type="text" id="market-basic-charge" class="form-control" placeholder="" />
+                              <input type="text" name="companyAddress" class="form-control" placeholder="" />
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" for="formtabs-last-name">담당자</label>
-                                <input type="text" id="market-link-charge" class="form-control" placeholder="" />
+                                <input type="text" name="companyManager" class="form-control" placeholder="" />
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" for="formtabs-last-name">전화번호</label>
-                                <input type="text" id="ship-charge" class="form-control" placeholder="" />
+                                <label class="form-label" for="formtabs-last-name">담당자 연락처</label>
+                                <input type="text" name="managerContact" class="form-control" placeholder="" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="formtabs-last-name">고객센터 전화번호</label>
+                                <input type="text" name="companyContact" class="form-control" placeholder="" />
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" for="formtabs-last-name">FAX</label>
-                                <input type="text" id="ship-charge" class="form-control" placeholder="" />
+                                <input type="text" name="companyFax" class="form-control" placeholder="" />
                             </div>
+                            <div class="col-md-6">
+                              <label class="form-label" for="formtabs-last-name">홈페이지</label><a href="" target="_blank" style="padding-left:5px"; id="site-link">접속하기</a>
+                              <input type="text" name="companySite" class="form-control" placeholder="" />
+                          </div>
                            
                           </div>
                           <div class="pt-4">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">등록</button>
-                            <button type="reset" class="btn btn-label-secondary">취소</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">수정</button>
+                            <!-- <button type="reset" class="btn btn-label-secondary">취소</button> -->
+                          </div>
+                        </form>
+                      </div>
+                      <!-- Account Details -->
+                      <div class="tab-pane fade" id="form-tabs-account" role="tabpanel">
+                        <form method="post" action="./API/company_edit_api.php">
+                          <input type="hidden" name="editType" value="memo">
+                          <input type="hidden" name="companyIx" class="company-ix"  val="">
+                          <div class="col-12">
+                            <div class="card mb-4">
+                              <h5 class="card-header">메모장</h5>
+                              <div class="card-body">
+                                <textarea id="company-memo" class="form-control autoResizeTextarea" name="companyMemo" rows="5"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pt-4">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">저장</button>
+                            <!-- <button type="reset" class="btn btn-label-secondary">취소</button> -->
+                          </div>
+                        </form>
+                      </div>
+                      <!-- Social Links -->
+                      <div class="tab-pane fade" id="form-tabs-social" role="tabpanel">
+                        <form method="post" action="./API/company_edit_api.php">
+                          <input type="hidden" name="editType" value="important">
+                          <input type="hidden" name="companyIx" class="company-ix"  val="">
+                          <div class="col-12">
+                            <div class="card mb-4">
+                              <h5 class="card-header">거래처 별 중요한 사항들 적어두세요</h5>
+                              <div class="card-body">
+                                <textarea id="company-important" class="form-control autoResizeTextarea" name="companyImportant" rows="5" value=""></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pt-4">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">저장</button>
+                            <!-- <button type="reset" class="btn btn-label-secondary">취소</button> -->
                           </div>
                         </form>
                       </div>
@@ -1813,6 +1917,7 @@
               </div>
 
              
+
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -1881,11 +1986,77 @@
     <script src="../../assets/vendor/libs/moment/moment.js"></script>
     <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/libs/quill/katex.js"></script>
+    <script src="../../assets/vendor/libs/quill/quill.js"></script>
 
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="../../assets/js/form-layouts.js"></script>
+    <script src="../../assets/js/forms-editors.js"></script>
+    <script>
+
+      var globalCompany;
+      // 동적으로 생성된 버튼에 클릭 이벤트 바인딩
+      $(document).on('click', '.alert-secondary', function() {
+          $('.alert-secondary').removeClass('active');
+          $(this).addClass('active');
+          globalCompany = $(this).text().trim();
+          getCompanyData(globalCompany);
+      });
+
+      function getCompanyData(company_name){
+        $.ajax({
+          type: "POST",
+          url: "./API/company_get_api.php", // 서버 엔드포인트를 적절히 변경
+          dataType : 'json',
+          data: {companyName:company_name,'getType':'basic'},
+          success: function(response) {
+              // 서버로부터 성공 응답을 받았을 때 처리
+              console.log(response['data']);
+
+              $(".company-ix").val(response['data'][0]['ix']);
+              $("input[name='companyName']").val(response['data'][0]['company_name']);
+              $("input[name='companyAddress']").val(response['data'][0]['company_address']);
+              $("input[name='companyManager']").val(response['data'][0]['company_manager']);
+              $("input[name='managerContact']").val(response['data'][0]['manager_contact']);
+              $("input[name='companyContact']").val(response['data'][0]['company_contact']);
+              $("input[name='companyFax']").val(response['data'][0]['company_fax']);
+              $("input[name='companySite']").val(response['data'][0]['company_site']);
+              $("#site-link").attr("href",response['data'][0]['company_site']);
+
+              $("#company-memo").val(response['data'][0]['company_memo']);
+              $("#company-important").val(response['data'][0]['company_important']);
+              
+              // resizeTextarea($("#company-memo"));
+              // resizeTextarea("company-important");
+          },
+          error: function(error) {
+              // 서버로부터 오류 응답을 받았을 때 처리
+              console.error("Error:", error);
+          }
+        });
+      } 
+
+      function resizeTextarea(textarea) {
+          textarea.style.height = 'auto';
+          textarea.style.height = textarea.scrollHeight + 'px';
+      }
+
+      function setTextarea(){
+        var textareas = document.querySelectorAll('.autoResizeTextarea');
+
+        textareas.forEach(function(textarea) {
+            textarea.addEventListener('input', function() {
+                resizeTextarea(textarea);
+            });
+            // 초기 로드 시 크기 조절
+            resizeTextarea(textarea);
+        });
+      }
+
+   
+    </script>
   </body>
 </html>
